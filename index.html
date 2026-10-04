@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Porsche — 911 GT3 R</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- =========================================================
+       3D SCENE
+    ========================================================== -->
+
+    <canvas id="sceneCanvas" aria-hidden="true"></canvas>
+
+    <div class="vignette"></div>
+    <div class="grain"></div>
+
+    <!-- =========================================================
+       LOADER
+    ========================================================== -->
+
+    <div id="loader">
+      <div class="loader-content">
+        <span id="loaderBrand">PORSCHE MOTORSPORT</span>
+
+        <strong id="loaderModel">911 GT3 R</strong>
+
+        <small id="loaderStatus">INITIALIZING</small>
+
+        <i></i>
+      </div>
+    </div>
+
+    <!-- =========================================================
+       NAVBAR
+    ========================================================== -->
+
+    <header class="navbar" id="navbar">
+      <div class="nav-wrap">
+        <a href="#hero" class="logo">
+          <span class="porsche-mark">
+            <svg viewBox="0 0 140 70" aria-hidden="true">
+              <rect
+                x="3"
+                y="3"
+                width="134"
+                height="64"
+                rx="3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              />
+
+              <path
+                d="M13 53 L27 20 L42 53"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              />
+
+              <path
+                d="M98 20 L113 53 L127 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              />
+
+              <path
+                d="M43 35 H98"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                opacity=".45"
+              />
+            </svg>
+          </span>
+
+          <div class="logo-name">PORSCHE</div>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#heritage"> MOTORSPORT </a>
+
+          <a href="#performance"> PERFORMANCE </a>
+
+          <a href="#atelier"> WEISSACH </a>
+
+          <a href="#experience"> THE RACE </a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="#models" class="nav-button"> 911 GT3 R </a>
+
+          <button id="musicToggle" class="music-toggle" type="button">
+            ♪ MUSIC
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================================
+       HERO HUD
+    ========================================================== -->
+
+    <section id="heroHud">
+      <div class="hero-meta">
+        <span> PORSCHE MOTORSPORT </span>
+
+        <span> MADE BY RYAN ANDRIAWAN </span>
+
+        <span> 911 GT3 R </span>
+      </div>
+
+      <!-- TACHOMETER -->
+
+      <div class="tachometer">
+        <svg viewBox="0 0 220 220">
+          <defs>
+            <linearGradient id="tachGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff" />
+
+              <stop offset="40%" stop-color="#dddddd" />
+
+              <stop offset="72%" stop-color="#e51c1c" />
+
+              <stop offset="100%" stop-color="#600000" />
+            </linearGradient>
+          </defs>
+
+          <g id="tachRing">
+            <circle
+              cx="110"
+              cy="110"
+              r="99"
+              fill="none"
+              stroke="url(#tachGradient)"
+              stroke-width="4"
+              stroke-dasharray="310 210"
+            />
+
+            <circle
+              cx="110"
+              cy="110"
+              r="83"
+              fill="none"
+              stroke="#ffffff"
+              stroke-opacity=".12"
+              stroke-width="1"
+            />
+
+            <g id="tachTicks"></g>
+          </g>
+        </svg>
+
+        <div class="tach-number">
+          <strong id="rpmNumber"> 00 </strong>
+
+          <span id="rpmUnit"> RPM × 100 </span>
+        </div>
+      </div>
+
+      <!-- HERO TEXT -->
+
+      <div class="hero-content">
+        <span class="hero-eyebrow"> PORSCHE MOTORSPORT </span>
+
+        <h1>
+          <span> 911 </span>
+
+          <strong> GT3 R </strong>
+        </h1>
+
+        <p>
+          A race-bred machine shaped by aerodynamics, precision and the
+          relentless pursuit of the perfect lap.
+        </p>
+      </div>
+
+      <!-- ENGINE -->
+
+      <button class="start-engine" id="startEngine" type="button">
+        <div class="engine-circle">
+          <span>●</span>
+        </div>
+
+        <div>
+          <strong> START ENGINE </strong>
+
+          <small> FLAT-SIX / RACING </small>
+        </div>
+      </button>
+
+      <div class="scroll-indicator">
+        <span> SCROLL TO EXPLORE </span>
+
+        <i></i>
+      </div>
+    </section>
+
+    <!-- =========================================================
+       MAIN
+    ========================================================== -->
+
+    <main>
+      <!-- 3D SCROLL SPACE -->
+
+      <section id="hero" class="stage" style="height: 100vh"></section>
+
+      <section id="carScroll" class="stage" style="height: 300vh"></section>
+
+      <!-- =======================================================
+         01 MOTORSPORT
+      ======================================================== -->
+
+      <section id="heritage" class="motorsport reveal-section">
+        <div class="section-title reveal">
+          <span> 01 — MOTORSPORT </span>
+
+          <h2>
+            BORN FOR THE
+            <em>TRACK</em>
+          </h2>
+
+          <p>
+            The Porsche 911 GT3 R is a dedicated customer racing car developed
+            for GT3 competition and engineered around control, balance and
+            aerodynamic efficiency.
+          </p>
+        </div>
+
+        <!-- =====================================================
+             BORN FOR THE TRACK GRID
+        ====================================================== -->
+
+        <div class="heritage-grid">
+          <!-- =================================================
+               01 — RACING DNA
+          ================================================== -->
+
+          <article class="heritage-item heritage-main reveal">
+            <div class="heritage-image">
+              <img src="images/circuit.jpg" alt="Porsche racing circuit" />
+            </div>
+
+            <div class="heritage-overlay"></div>
+
+            <div class="big-number">01</div>
+
+            <div class="motorsport-symbol">911</div>
+
+            <div class="heritage-copy">
+              <span> GT3 CLASS </span>
+
+              <h3>RACING DNA</h3>
+
+              <p>
+                A focused racing environment where driver feedback, chassis
+                balance and aerodynamic performance work together.
+              </p>
+            </div>
+          </article>
+
+          <!-- =================================================
+               02 — ENGINEERING
+          ================================================== -->
+
+          <article
+            class="heritage-item heritage-photo reveal"
+            style="--heritage-bg: url(&quot;images/engineering.jpg&quot;)"
+          >
+            <div class="heritage-photo-bg"></div>
+
+            <div class="heritage-photo-overlay"></div>
+
+            <div class="big-number">02</div>
+
+            <span class="heritage-code"> WEISSACH </span>
+
+            <div class="heritage-photo-content">
+              <h3>ENGINEERING</h3>
+
+              <p>
+                Motorsport development centered around precision, consistency
+                and usable speed.
+              </p>
+            </div>
+          </article>
+
+          <!-- =================================================
+               03 — ENDURANCE
+          ================================================== -->
+
+          <article
+            class="heritage-item heritage-photo reveal"
+            style="--heritage-bg: url(&quot;images/endurance.jpg&quot;)"
+          >
+            <div class="heritage-photo-bg"></div>
+
+            <div class="heritage-photo-overlay"></div>
+
+            <div class="big-number">03</div>
+
+            <span class="heritage-code"> RACING </span>
+
+            <div class="heritage-photo-content">
+              <h3>ENDURANCE</h3>
+
+              <p>
+                Developed to handle the demands of demanding GT3 circuit
+                competition.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =======================================================
+         02 PERFORMANCE
+      ======================================================== -->
+
+      <section id="performance" class="performance reveal-section">
+        <div class="performance-header reveal">
+          <span> 02 — PERFORMANCE </span>
+
+          <h2>
+            NUMBERS
+            <em>MATTER</em>
+          </h2>
+        </div>
+
+        <div class="performance-grid">
+          <article class="performance-card reveal">
+            <span> 01 </span>
+
+            <h3>ENGINE</h3>
+
+            <div class="stat">4.2L</div>
+
+            <p>
+              Water-cooled six-cylinder naturally aspirated boxer engine mounted
+              at the rear.
+            </p>
+          </article>
+
+          <article class="performance-card reveal">
+            <span> 02 </span>
+
+            <h3>POWER</h3>
+
+            <div class="stat">565</div>
+
+            <p>Approximately 565 hp, depending on Balance of Performance.</p>
+          </article>
+
+          <article class="performance-card reveal">
+            <span> 03 </span>
+
+            <h3>RPM</h3>
+
+            <div class="stat">9250</div>
+
+            <p>High-revving naturally aspirated flat-six racing character.</p>
+          </article>
+        </div>
+
+        <div class="performance-visual reveal">
+          <img src="images/carbon.jpg" alt="Porsche carbon fiber detail" />
+
+          <div class="performance-visual-overlay"></div>
+
+          <div class="performance-caption">
+            <span> LIGHTWEIGHT ENGINEERING </span>
+
+            <strong>
+              PERFORMANCE
+              <em>WITHOUT COMPROMISE</em>
+            </strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================
+         03 WEISSACH
+      ======================================================== -->
+
+      <section id="atelier" class="atelier reveal-section">
+        <div class="atelier-title reveal">
+          <span> 03 — WEISSACH </span>
+
+          <h2>
+            BUILT AROUND
+            <em>PRECISION</em>
+          </h2>
+        </div>
+
+        <div class="atelier-grid">
+          <article class="material carbon reveal">
+            <div class="material-background"></div>
+
+            <div class="material-content">
+              <span> MATERIAL 01 </span>
+
+              <h3>CARBON</h3>
+
+              <p>Lightweight body construction focused on racing efficiency.</p>
+            </div>
+          </article>
+
+          <article class="material cockpit reveal">
+            <div class="material-background"></div>
+
+            <div class="material-content">
+              <span> MATERIAL 02 </span>
+
+              <h3>COCKPIT</h3>
+
+              <p>Everything within reach. Nothing unnecessary.</p>
+            </div>
+          </article>
+
+          <article class="material aero reveal">
+            <div class="material-background"></div>
+
+            <div class="material-content">
+              <span> MATERIAL 03 </span>
+
+              <h3>AERODYNAMICS</h3>
+
+              <p>
+                Airflow transformed into stability, downforce and cornering
+                confidence.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="aero-detail reveal">
+          <div class="aero-detail-image">
+            <img
+              src="images/rear-aero.jpg"
+              alt="Porsche rear aerodynamic detail"
+            />
+          </div>
+
+          <div class="aero-detail-copy">
+            <span> AERO / 04 </span>
+
+            <h3>
+              AIR
+              <em>IS CONTROL.</em>
+            </h3>
+
+            <p>
+              Every surface has a purpose. Every line manages airflow. The
+              result is a machine that remains composed when speed rises.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================
+         04 THE MACHINE
+      ======================================================== -->
+
+      <section id="models" class="models reveal-section">
+        <div class="models-heading reveal">
+          <span> 04 — THE MACHINE </span>
+
+          <h2>
+            911
+            <em>GT3 R</em>
+          </h2>
+        </div>
+
+        <article class="car-card">
+          <div class="model-copy reveal">
+            <span> 992 GENERATION </span>
+
+            <h3>
+              GT3<br />
+              R
+            </h3>
+
+            <p>
+              A purpose-built GT3 racing machine with a naturally aspirated
+              flat-six, sequential racing transmission and rear-wheel drive.
+            </p>
+
+            <a href="#experience"> THE RACE </a>
+          </div>
+
+          <div class="car-glow"></div>
+
+          <div id="porscheModel" class="porsche-model" aria-hidden="true"></div>
+        </article>
+
+        <div class="spec-strip reveal">
+          <div>
+            <span> DISPLACEMENT </span>
+
+            <strong> 4,194 CC </strong>
+          </div>
+
+          <div>
+            <span> POWER </span>
+
+            <strong> 565 HP </strong>
+          </div>
+
+          <div>
+            <span> DRIVE </span>
+
+            <strong> RWD </strong>
+          </div>
+
+          <div>
+            <span> GEARBOX </span>
+
+            <strong> 6-SPEED </strong>
+          </div>
+
+          <div>
+            <span> TYPE </span>
+
+            <strong> GT3 </strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================
+         05 THE RACE
+      ======================================================== -->
+
+      <section id="experience" class="experience race-section reveal-section">
+        <!-- RACE HEADER -->
+
+        <div class="race-header reveal">
+          <span class="section-kicker"> 05 — MOTORSPORT / 911 GT3 R </span>
+
+          <h2>
+            THE
+            <em>RACE</em>
+          </h2>
+
+          <p>
+            When the lights go out, there is no room for hesitation. The race
+            becomes a sequence of precision, speed and control.
+          </p>
+        </div>
+
+        <!-- =====================================================
+             01 GRID
+        ====================================================== -->
+
+        <article class="race-stage race-grid reveal">
+          <div class="race-image">
+            <img
+              src="images/race-grid.jpg"
+              alt="Porsche 911 GT3 R on the starting grid"
+            />
+
+            <div class="race-image-overlay"></div>
+
+            <span class="race-number"> 01 </span>
+
+            <span class="race-label"> GRID </span>
+          </div>
+
+          <div class="race-copy">
+            <span class="race-phase"> STARTING GRID </span>
+
+            <h3>
+              WAIT FOR<br />
+
+              <span> LIGHTS OUT. </span>
+            </h3>
+
+            <p>
+              The car sits still. The engine doesn't. Seconds before the start,
+              everything becomes preparation, focus and control.
+            </p>
+
+            <div class="race-data">
+              <div>
+                <strong> 01 </strong>
+
+                <span> GRID </span>
+              </div>
+
+              <div>
+                <strong> 00:00 </strong>
+
+                <span> LIGHTS </span>
+              </div>
+
+              <div>
+                <strong> 911 </strong>
+
+                <span> GT3 R </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- =====================================================
+             02 ATTACK
+        ====================================================== -->
+
+        <article class="race-stage race-attack reveal">
+          <div class="race-copy">
+            <span class="race-phase"> FULL ATTACK </span>
+
+            <h3>
+              BRAKE.<br />
+
+              <span> TURN. ATTACK. </span>
+            </h3>
+
+            <p>
+              Braking zones become opportunities. The car stays planted through
+              the corner, carrying speed while every movement matters.
+            </p>
+
+            <div class="race-data">
+              <div>
+                <strong> 02 </strong>
+
+                <span> ATTACK </span>
+              </div>
+
+              <div>
+                <strong> APEX </strong>
+
+                <span> LINE </span>
+              </div>
+
+              <div>
+                <strong> MAX </strong>
+
+                <span> FOCUS </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="race-image">
+            <img
+              src="images/race-attack.jpg"
+              alt="Porsche 911 GT3 R attacking a corner"
+            />
+
+            <div class="race-image-overlay"></div>
+
+            <span class="race-number"> 02 </span>
+
+            <span class="race-label"> ATTACK </span>
+          </div>
+        </article>
+
+        <!-- =====================================================
+             03 ENDURANCE
+        ====================================================== -->
+
+        <article class="race-stage race-endurance reveal">
+          <div class="race-image">
+            <img
+              src="images/race-night.jpg"
+              alt="Porsche 911 GT3 R during a night endurance race"
+            />
+
+            <div class="race-image-overlay"></div>
+
+            <span class="race-number"> 03 </span>
+
+            <span class="race-label"> ENDURANCE </span>
+          </div>
+
+          <div class="race-copy">
+            <span class="race-phase"> LONG STINT </span>
+
+            <h3>
+              KEEP<br />
+
+              <span> PUSHING. </span>
+            </h3>
+
+            <p>
+              Racing isn't decided in a single corner. Lap after lap, the driver
+              and machine have to maintain rhythm, precision and consistency.
+            </p>
+
+            <div class="race-data">
+              <div>
+                <strong> 03 </strong>
+
+                <span> STINT </span>
+              </div>
+
+              <div>
+                <strong> LAP </strong>
+
+                <span> AFTER LAP </span>
+              </div>
+
+              <div>
+                <strong> 24H </strong>
+
+                <span> ENDURANCE </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- =====================================================
+             04 DRIVER
+        ====================================================== -->
+
+        <article class="race-stage race-driver reveal">
+          <div class="race-copy">
+            <span class="race-phase"> DRIVER / MACHINE </span>
+
+            <h3>
+              ONE<br />
+
+              <span> RHYTHM. </span>
+            </h3>
+
+            <p>
+              There is no separation between driver and machine. Steering input,
+              braking and throttle become one continuous rhythm around the
+              circuit.
+            </p>
+
+            <div class="race-data">
+              <div>
+                <strong> 04 </strong>
+
+                <span> DRIVER </span>
+              </div>
+
+              <div>
+                <strong> 1:1 </strong>
+
+                <span> CONTROL </span>
+              </div>
+
+              <div>
+                <strong> RACE </strong>
+
+                <span> MODE </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="race-image">
+            <img
+              src="images/race-driver.jpg"
+              alt="Porsche 911 GT3 R driver during a race"
+            />
+
+            <div class="race-image-overlay"></div>
+
+            <span class="race-number"> 04 </span>
+
+            <span class="race-label"> DRIVER </span>
+          </div>
+        </article>
+
+        <!-- =====================================================
+             FINISH
+        ====================================================== -->
+
+        <div class="race-finish reveal">
+          <span class="finish-line"></span>
+
+          <span class="race-phase"> CHECKERED FLAG </span>
+
+          <h3>
+            THE RACE<br />
+
+            <span> NEVER STOPS. </span>
+          </h3>
+
+          <p>
+            From the first lap to the final flag, performance is measured in
+            every second.
+          </p>
+
+          <div class="finish-mark">PORSCHE <b>911 GT3 R</b></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================================================
+       FOOTER
+    ========================================================== -->
+
+    <footer>
+      <div class="footer-logo">
+        <strong> PORSCHE </strong>
+
+        <span> MOTORSPORT </span>
+      </div>
+
+      <p>911 GT3 R · 992 · RACING</p>
+
+      <small>
+        Fan-made Porsche Motorsport concept website. Not affiliated with Porsche
+        AG.
+      </small>
+    </footer>
+
+    <!-- =========================================================
+       LIBRARIES
+    ========================================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
